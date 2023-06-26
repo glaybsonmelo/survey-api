@@ -1,4 +1,5 @@
 import { SignUpController } from './signup';
+import { MissinParamError } from '../erros/missing-param-error';
 
 describe('signUp Controller', () => {
   it('Should return 400 if no name is provided', () => {
@@ -12,7 +13,7 @@ describe('signUp Controller', () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new Error('Missing param: name'));
+    expect(httpResponse.body).toEqual(new MissinParamError('name'));
   });
 
   it('Should return 400 if no email is provided', () => {
@@ -26,6 +27,6 @@ describe('signUp Controller', () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new Error('Missing param: email'));
+    expect(httpResponse.body).toEqual(new MissinParamError('email'));
   });
 });
